@@ -3,13 +3,13 @@ import hashlib
 import tkinter as tk
 from tkinter import filedialog, messagebox
 
-class SMsmpwdApp:
+class SMPWDApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Scrap Mechanic Password Tool")
 
         # Set window size and center contents
-        self.root.geometry("350x250")
+        self.root.geometry("400x250")
         self.root.resizable(False, False)
 
         # Main frame for centering the elements
@@ -25,6 +25,9 @@ class SMsmpwdApp:
 
         set_button = tk.Button(main_frame, text="Set", command=self.set_password, width=20)
         set_button.grid(row=2, columnspan=2, pady=10)
+
+        restore_button = tk.Button(main_frame, text="Restore", command=self.restore_defaults, width=20)
+        restore_button.grid(row=3, columnspan=2, pady=10)
 
         self.scrap_mechanic_path = self.find_scrap_mechanic_directory()
         if not self.scrap_mechanic_path or not self.check_integrity(self.scrap_mechanic_path):
@@ -68,17 +71,48 @@ class SMsmpwdApp:
         with open(survival_game_path, 'r') as file:
             lines = file.readlines()
 
+        # Update password
         if lines[0].startswith('--smpwd: '):
             lines[0] = f'--smpwd: {hashed_password}\n'
         else:
             lines.insert(0, f'--smpwd: {hashed_password}\n')
 
+        # Update cheats setting
+        for i in range(len(lines)):
+            if lines[i].strip().startswith("local addCheats"):
+                if self.cheats_var.get():
+                    lines[i] = "	local addCheats = true\n"
+                else:
+                    lines[i] = "	local addCheats = g_survivalDev\n"
+                break
+
         with open(survival_game_path, 'w') as file:
             file.writelines(lines)
 
-        messagebox.showinfo("Success", "Password set successfully.")
+        messagebox.showinfo("Success", "Settings updated successfully.")
+
+    def restore_defaults(self):
+        survival_game_path = os.path.join(self.scrap_mechanic_path, "Survival", "Scripts", "game", "SurvivalGame.lua")
+
+        with open(survival_game_path, 'r') as file:
+            lines = file.readlines()
+
+        # Remove password line if it exists
+        if lines[0].startswith('--smpwd: '):
+            lines.pop(0)
+
+        # Reset cheats setting to default
+        for i in range(len(lines)):
+            if lines[i].strip().startswith("local addCheats"):
+                lines[i] = "	local addCheats = g_survivalDev\n"
+                break
+
+        with open(survival_game_path, 'w') as file:
+            file.writelines(lines)
+
+        messagebox.showinfo("Success", "Defaults restored successfully.")
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = SMsmpwdApp(root)
+    app = SMPWDApp(root)
     root.mainloop()
