@@ -12,3 +12,5 @@ Click 'Code' > 'Download ZIP' and extract the contents. Make sure you have Pytho
 
 ## Details for Nerds
 By default, SM multiplayer sessions are checked for file hash integrity when joining. It's meant to be a security feature, but can be repurposed here to enforce that someone has to provide a password before they can join.
+
+![SM](sm.png)
