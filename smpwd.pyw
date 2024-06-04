@@ -8,26 +8,41 @@ class SMPWDApp:
         self.root = root
         self.root.title("Scrap Mechanic Password Tool")
 
+        # Dark theme colors
+        bg_color = "#1e1e1e"
+        fg_color = "#ffffff"
+        input_bg_color = "#2e2e2e"
+        input_fg_color = "#ffffff"
+
         # Set window size and center contents
-        self.root.geometry("400x250")
+        self.root.geometry("300x300")
         self.root.resizable(False, False)
 
+        # Configure root background color
+        self.root.config(bg=bg_color)
+
         # Main frame for centering the elements
-        main_frame = tk.Frame(root)
+        main_frame = tk.Frame(root, bg=bg_color)
         main_frame.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 
-        tk.Label(main_frame, text="Server Password:").grid(row=0, column=0, pady=10)
-        self.password_entry = tk.Entry(main_frame, width=30)
-        self.password_entry.grid(row=0, column=1, pady=10)
+        img_path = os.path.join(os.path.dirname(__file__), "sm.png")
+        self.sm_image = tk.PhotoImage(file=img_path).subsample(5)
+
+        image_label = tk.Label(main_frame, image=self.sm_image, bg=bg_color)
+        image_label.grid(row=0, columnspan=4, pady=20)
+
+        tk.Label(main_frame, text="Server Password:", bg=bg_color, fg=fg_color).grid(row=1, column=0, pady=10)
+        self.password_entry = tk.Entry(main_frame, width=24, bg=input_bg_color, fg=input_fg_color)
+        self.password_entry.grid(row=1, column=1, pady=10)
 
         self.cheats_var = tk.IntVar()
-        tk.Checkbutton(main_frame, text="Server has cheats", variable=self.cheats_var).grid(row=1, columnspan=2, pady=10)
+        tk.Checkbutton(main_frame, text="Server has cheats", variable=self.cheats_var, bg=bg_color, fg=fg_color, selectcolor=bg_color, highlightbackground=bg_color).grid(row=2, columnspan=2, pady=10)
 
-        set_button = tk.Button(main_frame, text="Set", command=self.set_password, width=20)
-        set_button.grid(row=2, columnspan=2, pady=10)
+        set_button = tk.Button(main_frame, text="Set", command=self.set_password, width=16, bg=bg_color, fg=fg_color)
+        set_button.grid(row=3, columnspan=2, pady=10)
 
-        restore_button = tk.Button(main_frame, text="Restore", command=self.restore_defaults, width=20)
-        restore_button.grid(row=3, columnspan=2, pady=10)
+        restore_button = tk.Button(main_frame, text="Restore", command=self.restore_defaults, width=16, bg=bg_color, fg=fg_color)
+        restore_button.grid(row=4, columnspan=2, pady=10)
 
         self.scrap_mechanic_path = self.find_scrap_mechanic_directory()
         if not self.scrap_mechanic_path or not self.check_integrity(self.scrap_mechanic_path):
