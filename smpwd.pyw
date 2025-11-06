@@ -7,6 +7,9 @@ class SMPWDApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Scrap Mechanic Password Tool")
+        icon_path = os.path.join(os.path.dirname(__file__), "sm.ico")
+        if os.path.exists(icon_path):
+            self.root.iconbitmap(icon_path)
 
         bg_color = "#1e1e1e"
         fg_color = "#ffffff"
