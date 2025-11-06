@@ -8,20 +8,16 @@ class SMPWDApp:
         self.root = root
         self.root.title("Scrap Mechanic Password Tool")
 
-        # Dark theme colors
         bg_color = "#1e1e1e"
         fg_color = "#ffffff"
         input_bg_color = "#2e2e2e"
         input_fg_color = "#ffffff"
 
-        # Set window size and center contents
         self.root.geometry("300x300")
         self.root.resizable(False, False)
 
-        # Configure root background color
         self.root.config(bg=bg_color)
 
-        # Main frame for centering the elements
         main_frame = tk.Frame(root, bg=bg_color)
         main_frame.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 
