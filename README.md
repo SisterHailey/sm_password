@@ -4,7 +4,13 @@ Scrap Mechanic Password Session Locker (smpwd)
 Locks your session under a password, so that even Steam friends are unable to join without also having the password.
 
 ## How to Use
-Click 'Code' > 'Download ZIP' and extract the contents. Make sure you have Python installed, and run `start.bat`
+### For Windows:
+Go to 'Releases' and download the exe for Windows. Run the exe.  
+If you are prompted to select a directory, direct it to the folder where Scrap Mechanic is located. You can find this through steam by right clicking on the game > Manage > Browse local files.
+
+### For other platforms:
+Click 'Code' > 'Download ZIP' and extract the contents. Make sure you have Python installed, and run `start.bat`.  
+If asked to select a directory, follow the same steps above.
 
 ## Supported Platforms
 
