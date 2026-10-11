@@ -1,6 +1,6 @@
 > **⚠️ This project is archived and no longer actively maintained.**
 > 
-> The repository remains available as a read-only reference, but no new issues, pull requests, or updates will be processed.
+> The repository remains available as a read-only reference, but no new issues, pull requests, or updates will be processed.  
 > This is because, as of the Drilling Thunder update, Scrap Mechanic now includes a native option to restrict multiplayer to singleplayer, invite-only, friends, and friends-of-friends.
 
 # sm_password
